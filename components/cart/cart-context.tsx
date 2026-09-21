@@ -1,11 +1,6 @@
 "use client";
 
-import type {
-  Cart,
-  CartItem,
-  Product,
-  ProductVariant,
-} from "lib/shopify/types";
+import type { Cart, CartItem, Product, ProductVariant } from "lib/medusa/types";
 import React, {
   createContext,
   use,

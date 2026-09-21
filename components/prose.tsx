@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+// html 은 그대로 DOM 에 들어간다. 스토어프런트가 소유한 상수(lib/medusa/menus.ts 의 PAGES)만 넘긴다 —
+// 백엔드 · 사용자에게서 온 문자열은 넘기지 않는다(상품 설명은 product-description.tsx 가 글자로 출력한다).
 const Prose = ({ html, className }: { html: string; className?: string }) => {
   return (
     <div

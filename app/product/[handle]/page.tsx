@@ -3,8 +3,8 @@ import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";
 import { ProductDescription } from "components/product/product-description";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
-import { getProduct, getProductRecommendations } from "lib/shopify";
-import type { Image } from "lib/shopify/types";
+import { getProduct, getProductRecommendations } from "lib/medusa";
+import type { Image } from "lib/medusa/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -77,7 +77,8 @@ export default async function ProductPage(props: {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd),
+          // JSON.stringify 는 "<" 를 그대로 둔다. 상품 제목 · 설명에 "</script>" 가 있으면 script 요소가 거기서 닫히므로 유니코드 이스케이프로 바꾼다.
+          __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <div className="mx-auto max-w-(--breakpoint-2xl) px-4">

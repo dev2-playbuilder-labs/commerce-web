@@ -1,7 +1,6 @@
 import { AddToCart } from "components/cart/add-to-cart";
 import Price from "components/price";
-import Prose from "components/prose";
-import { Product } from "lib/shopify/types";
+import { Product } from "lib/medusa/types";
 import { VariantSelector } from "./variant-selector";
 
 export function ProductDescription({ product }: { product: Product }) {
@@ -17,11 +16,11 @@ export function ProductDescription({ product }: { product: Product }) {
         </div>
       </div>
       <VariantSelector options={product.options} variants={product.variants} />
-      {product.descriptionHtml ? (
-        <Prose
-          className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-          html={product.descriptionHtml}
-        />
+      {/* Medusa 의 description 은 관리자가 입력한 일반 텍스트다. HTML 로 해석하지 않고 React 가 escape 한 글자로만 내보낸다. */}
+      {product.description ? (
+        <p className="mb-6 text-sm leading-tight whitespace-pre-line dark:text-white/[60%]">
+          {product.description}
+        </p>
       ) : null}
       <AddToCart product={product} />
     </>
